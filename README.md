@@ -1,1 +1,1 @@
-# go-osm-simple
+# simple tutorial how to use open street map
