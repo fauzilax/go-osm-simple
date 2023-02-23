@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Retrieve User Location</title>
+  </head>
+  <body>
+    <h1>Retrieve User Location</h1>
+    <button id="getLocationBtn">Get Location</button>
+
+    <script>
+      const getLocationBtn = document.getElementById("getLocationBtn");
+
+      getLocationBtn.addEventListener("click", () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(position => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Make a request to the server endpoint with the location information as query parameters
+            fetch(`http://localhost:8000/location?latitude=${latitude}&longitude=${longitude}`)
+              .then(response => response.json())
+              .then(data => {
+                console.log(data);
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          });
+        } else {
+          console.error("Geolocation is not supported by this browser.");
+        }
+      });
+    </script>
+  </body>
+</html>
